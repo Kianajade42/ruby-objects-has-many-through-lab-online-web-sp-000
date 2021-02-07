@@ -8,19 +8,19 @@ class Patient
     @@all << self
   end
 
-  def self.all
-    @@all
-  end
-
-  def new_appointment(doctor, date)
-    Appointment.new(self, doctor,date)
+  def new_appointment(date,doctor)
+    Appointment.new(date,self,doctor)
   end
 
   def appointments
-    Appointment.all { |appointment| appointment.patient == self }
+    Appointment.all.find_all { |appointment| appointment.patient == self }
   end
 
   def doctors
     appointments.map { |appointment|appointment.doctor}
   end
+end
+
+def self.all
+  @@all
 end
